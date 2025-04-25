@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CanvasController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class CanvasController : MonoBehaviour
     public GameObject CanvasLogo;
 
     public float delay = 3f;
+    public float delayChangeScreen = 2f;
 
     private Animator logoAnimator;
 
@@ -51,5 +53,8 @@ public class CanvasController : MonoBehaviour
         {
             Debug.LogError("Animator NOT found!");
         }
+
+        yield return new WaitForSeconds(delayChangeScreen);
+        SceneManager.LoadScene("LoadingMenu");
     }
 }
