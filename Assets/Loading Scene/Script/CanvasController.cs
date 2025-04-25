@@ -9,7 +9,7 @@ public class CanvasController : MonoBehaviour
     public GameObject CanvasLogo;
 
     public float delay = 3f;
-    public float delayChangeScreen = 2f;
+    public float delayChangeScreen = 0.5f;
 
     private Animator logoAnimator;
 
