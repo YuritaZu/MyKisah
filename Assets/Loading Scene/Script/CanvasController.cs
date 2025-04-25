@@ -4,15 +4,52 @@ using UnityEngine;
 
 public class CanvasController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject UnityLogin;
+    public GameObject CanvasLogo;
+
+    public float delay = 3f;
+
+    private Animator logoAnimator;
+
+    void Start() // Kapital 'S' penting
     {
-        
+        if (CanvasLogo != null)
+        {
+            Transform pgLogoTransform = CanvasLogo.transform.Find("PGLogo2");
+            if (pgLogoTransform != null)
+            {
+                logoAnimator = pgLogoTransform.GetComponent<Animator>();
+            }
+            else
+            {
+                Debug.LogError("PGLogo2 not found as a child of CanvasLogo.");
+            }
+        }
+        else
+        {
+            Debug.LogError("CanvasLogo is not assigned.");
+        }
+
+        StartCoroutine(TransitionSplashToLogo());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator TransitionSplashToLogo()
     {
-        
+        yield return new WaitForSeconds(delay);
+
+        // Tutup splash, buka logo
+        UnityLogin.SetActive(false);
+        CanvasLogo.SetActive(true);
+
+        // Jalankan animasi logo
+        if (logoAnimator != null)
+        {
+            Debug.Log("Animator found, playing logo...");
+            logoAnimator.SetTrigger("PlayLogo");
+        }
+        else
+        {
+            Debug.LogError("Animator NOT found!");
+        }
     }
 }
