@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Menu/scene/Menu.unity
     guid: 99c67c66bf8082b4393492c2bccc849e
+  - enabled: 1
+    path: Assets/Pilih Game/Scene/Choose.unity
+    guid: 3d03c07a5793bec43828cce0e3246a97
   m_configObjects: {}
