@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class MenuButtons : MonoBehaviour
 {
     // Method yang akan dipanggil oleh button
@@ -31,5 +35,14 @@ public class MenuButtons : MonoBehaviour
             
             yield return null;
         }
+    }
+
+     public void ExitGame()
+    {
+        #if UNITY_EDITOR
+        EditorApplication.isPlaying = false;  // Stop play mode
+        #else
+        Application.Quit(); // Works in built game
+        #endif
     }
 }
