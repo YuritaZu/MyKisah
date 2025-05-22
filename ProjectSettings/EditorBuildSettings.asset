@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Plant/Scene/PlantTime.unity
     guid: c691409b379381e48b08d2c191c792aa
+  - enabled: 1
+    path: Assets/SceneLoader/Scene/Loader.unity
+    guid: 0d7b251f94e7ea144ac8ae86a6fcf4f5
   m_configObjects: {}

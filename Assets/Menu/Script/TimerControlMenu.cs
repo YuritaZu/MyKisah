@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TimerControlMenu : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class TimerControlMenu : MonoBehaviour
 
     public void LoadTimerScene()
     {
-        SceneManager.LoadScene("PlantTime");
+        SceneLoadManager.LoadWithLoader("PlantTime");
     }
 
     public void ResetAndLoad()
@@ -20,7 +19,7 @@ public class TimerControlMenu : MonoBehaviour
         PlayerPrefs.Save();
 
         Debug.Log("Timer di-reset, masuk ke SceneTimer...");
-        SceneManager.LoadScene("PlantTime");
+        SceneLoadManager.LoadWithLoader("PlantTime");
     }
 
     public void StartButton()
@@ -28,12 +27,12 @@ public class TimerControlMenu : MonoBehaviour
         if (PlayerPrefs.HasKey(EndTimeKey))
         {
             Debug.Log("Timer sudah pernah dimulai, masuk ke SceneTimer.");
-            SceneManager.LoadScene("PlantTime");
+            SceneLoadManager.LoadWithLoader("PlantTime");
         }
         else
         {
             Debug.Log("Timer belum dimulai, masuk ke scene 'Pilihtanaman'.");
-            SceneManager.LoadScene("Choose");
+            SceneLoadManager.LoadWithLoader("Choose");
         }
     }
 }
