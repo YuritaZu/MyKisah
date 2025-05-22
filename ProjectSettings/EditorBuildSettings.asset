@@ -38,4 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameplayRakit/Scene/Gameplay.unity
     guid: 74e4463904a700849834d0c3e44065a2
+  - enabled: 1
+    path: Assets/Plant/Scene/GameplayFixLayu.unity
+    guid: e27650c2fd3d0dc4d8a90c3469f9b7d8
   m_configObjects: {}
