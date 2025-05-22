@@ -19,4 +19,14 @@ public class PilihGame : MonoBehaviour
             Debug.Log("Sudah di scene pertama, tidak bisa kembali.");
         }
     }
+
+    public void MateriButton()
+    {
+        SceneManager.LoadScene("CharacterSelect");
+    }
+
+    public void MiniGameButton()
+    {
+        SceneManager.LoadScene("MiniGame");
+    }
 }

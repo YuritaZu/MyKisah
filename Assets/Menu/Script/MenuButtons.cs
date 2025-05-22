@@ -40,6 +40,12 @@ public class MenuButtons : MonoBehaviour
         SceneManager.LoadScene("Setting");
     }
 
+    public void CreditsButton()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+
 
 
      public void ExitGame()

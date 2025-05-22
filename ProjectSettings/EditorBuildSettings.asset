@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Pilih Game/Scene/Choose.unity
     guid: 3d03c07a5793bec43828cce0e3246a97
+  - enabled: 1
+    path: Assets/Credits/Scene/Credits.unity
+    guid: 8e20ab89606d81248858a97271e535aa
+  - enabled: 1
+    path: Assets/Minigame/Scene/MiniGame.unity
+    guid: bb1e968a9348a65429add7435b38a5da
+  - enabled: 1
+    path: Assets/Select Character/Scene/CharacterSelect.unity
+    guid: c2b056e9e4925d645b179d3bc792e734
   m_configObjects: {}
