@@ -35,6 +35,11 @@ public class MenuButtons : MonoBehaviour
         SceneManager.LoadScene("Choose");
     }
 
+    public void OptionButton()
+    {
+        SceneManager.LoadScene("Setting");
+    }
+
 
 
      public void ExitGame()

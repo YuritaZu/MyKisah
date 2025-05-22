@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 256062115}
   - component: {fileID: 256062119}
   - component: {fileID: 256062120}
+  - component: {fileID: 256062121}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -453,6 +454,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555f31b181ae6c54dacdfaa1e3657827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &256062121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256062114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b5f26f612b61b478036da0062fc53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mixer: {fileID: 0}
+  SC: {fileID: 0}
 --- !u!1 &288947963
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 288947965}
   - component: {fileID: 288947964}
+  - component: {fileID: 288947966}
   m_Layer: 0
   m_Name: Sound Management
   m_TagString: Untagged
@@ -500,9 +516,23 @@ Transform:
   m_Children:
   - {fileID: 1810779934}
   - {fileID: 161994925}
+  - {fileID: 1773030847}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &288947966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288947963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de962e560879f0640871e7c024b1837b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 11674bdf7099f5248be9f83dd66ae973, type: 2}
 --- !u!1 &495740370
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,7 +904,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1359905035}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 256062120}
+        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
+        m_MethodName: OptionButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1561758986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,6 +1077,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730851278}
   m_CullTransparentMesh: 1
+--- !u!1 &1773030846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1773030847}
+  - component: {fileID: 1773030848}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1773030847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773030846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 288947965}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1773030848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773030846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de962e560879f0640871e7c024b1837b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 11674bdf7099f5248be9f83dd66ae973, type: 2}
 --- !u!1 &1809019702
 GameObject:
   m_ObjectHideFlags: 0
