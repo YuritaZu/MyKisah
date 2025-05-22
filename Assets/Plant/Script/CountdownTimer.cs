@@ -4,20 +4,10 @@ using UnityEngine;
 
 public class CountdownTimer : MonoBehaviour
 {
-    public double countdownTime = 86400f; // default 1 hari
+    public double countdownTime = 86400f; // default: 1 hari
     private double endTime;
 
-    private bool eventActive = false;
-
-
-    public TextMeshProUGUI countdownText;     // Teks merah: waktu panen
-    public TextMeshProUGUI conditionText;     // Teks kuning: kondisi tanaman
-
-    public PlantEventReceiver[] allPlants;    // Semua tanaman yang akan diubah secara otomatis
-
-    private double[] eventOffsets = { 10, 20, 30, 40 }; // 10m, 2h, 5h, 10h
-    private string[] eventKeys = { "Event1", "Event2", "Event3", "Event4" };
-    private string[] eventTypes = { "Serangga", "AirHabis", "AirBusuk", "Layu" };
+    public TextMeshProUGUI countdownText;
 
     private const string EndTimeKey = "CountdownEndTime";
 
@@ -27,30 +17,25 @@ public class CountdownTimer : MonoBehaviour
 
         if (PlayerPrefs.HasKey(EndTimeKey))
         {
+            // Ambil waktu selesai yang tersimpan
             endTime = double.Parse(PlayerPrefs.GetString(EndTimeKey));
         }
         else
         {
+            // Jika belum ada, buat baru
             endTime = now + countdownTime;
             PlayerPrefs.SetString(EndTimeKey, endTime.ToString());
             PlayerPrefs.Save();
         }
 
-        // Tampilkan event jika sudah terjadi sebelumnya
-        for (int i = 0; i < eventOffsets.Length; i++)
-{
-    if (PlayerPrefs.HasKey(eventKeys[i]))
-    {
-        double triggerTime = endTime - countdownTime + eventOffsets[i];
-        if (now >= triggerTime)  // hanya trigger kalau memang sudah waktunya
+        double remaining = endTime - now;
+        if (remaining <= 0)
         {
-            string savedEvent = PlayerPrefs.GetString(eventKeys[i]);
-            TriggerAllPlantsEvent(savedEvent);
+            OnTimerFinished();
+            return;
         }
-    }
-}
 
-        UpdateDisplay(endTime - now);
+        UpdateDisplay(remaining);
     }
 
     void Update()
@@ -65,53 +50,24 @@ public class CountdownTimer : MonoBehaviour
         }
 
         UpdateDisplay(remaining);
-
-        for (int i = 0; i < eventOffsets.Length; i++)
-        {
-            double triggerTime = endTime - countdownTime + eventOffsets[i];
-            if (now >= triggerTime && !PlayerPrefs.HasKey(eventKeys[i]))
-            {
-                string selectedEvent = eventTypes[UnityEngine.Random.Range(0, eventTypes.Length)];
-                PlayerPrefs.SetString(eventKeys[i], selectedEvent);
-                PlayerPrefs.Save();
-
-                TriggerAllPlantsEvent(selectedEvent);
-            }
-        }
     }
 
     public void ResetTimer()
-{
-    double now = GetUnixTimestamp();
-    endTime = now + countdownTime;
-    PlayerPrefs.SetString(EndTimeKey, endTime.ToString());
-
-    foreach (string key in eventKeys)
     {
-        PlayerPrefs.DeleteKey(key);
+        double now = GetUnixTimestamp();
+        endTime = now + countdownTime;
+        PlayerPrefs.SetString(EndTimeKey, endTime.ToString());
+        PlayerPrefs.Save();
+        enabled = true; 
     }
-
-    PlayerPrefs.Save();
-
-    foreach (var plant in allPlants)
-    {
-        plant.ResetVisual();
-    }
-
-    if (conditionText != null)
-        conditionText.text = "Tanaman sehat";
-
-    eventActive = false; // Tambahkan ini
-    enabled = true;
-}
-
 
     void OnTimerFinished()
     {
         UpdateDisplay(0);
         Debug.Log("Countdown selesai!");
-        PlayerPrefs.DeleteKey(EndTimeKey);
-        enabled = false;
+
+        PlayerPrefs.DeleteKey(EndTimeKey); // hapus agar tidak lanjut
+        enabled = false; // stop update
     }
 
     void UpdateDisplay(double remainingTime)
@@ -128,40 +84,10 @@ public class CountdownTimer : MonoBehaviour
         }
     }
 
-    void TriggerAllPlantsEvent(string eventType)
-{
-    if (eventActive) return; // Cegah jika sudah ada event aktif
-
-    eventActive = true;
-
-    foreach (var plant in allPlants)
-    {
-        plant.ApplyEvent(eventType);
-    }
-
-    if (conditionText != null)
-    {
-        switch (eventType)
-        {
-            case "Serangga":
-                conditionText.text = "Terserang serangga!";
-                break;
-            case "AirHabis":
-                conditionText.text = "Tanaman kekurangan air!";
-                break;
-            case "AirBusuk":
-                conditionText.text = "Air busuk merusak tanaman!";
-                break;
-            case "Layu":
-                conditionText.text = "Tanaman layu!";
-                break;
-        }
-    }
-}
-
-
     double GetUnixTimestamp()
     {
         return (DateTime.UtcNow - DateTime.UnixEpoch).TotalSeconds;
     }
+
+    
 }
